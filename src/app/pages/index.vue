@@ -2,10 +2,10 @@
   <main>
     <Panel>
       <PanelHead>
-        <PanelHeadTitle>
+        <h1 class="sr-only">
           {{ $t('pages.clients') }}
-        </PanelHeadTitle>
-        <PanelHeadBoat>
+        </h1>
+        <PanelHeadBoat class="w-full justify-end">
           <ClientsSearch />
           <div class="flex gap-2">
             <ClientsSort />

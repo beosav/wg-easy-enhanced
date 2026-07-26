@@ -16,14 +16,14 @@ ordered by name.
 Create and push a release tag:
 
 ```bash
-git tag v15.3.0-sort.1
-git push origin main v15.3.0-sort.1
+git tag v15.3.0-sort.2
+git push origin main v15.3.0-sort.2
 ```
 
 GitHub Actions publishes:
 
 ```text
-ghcr.io/beosav/wg-easy-enhanced:v15.3.0-sort.1
+ghcr.io/beosav/wg-easy-enhanced:v15.3.0-sort.2
 ghcr.io/beosav/wg-easy-enhanced:stable
 ```
 
@@ -37,7 +37,7 @@ Use the immutable version tag in `docker-compose.yaml`:
 ```yaml
 services:
   wg-easy:
-    image: ghcr.io/beosav/wg-easy-enhanced:v15.3.0-sort.1
+    image: ghcr.io/beosav/wg-easy-enhanced:v15.3.0-sort.2
 ```
 
 Then update the container:
