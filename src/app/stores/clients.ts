@@ -43,7 +43,7 @@ export const useClientsStore = defineStore('Clients', () => {
   // TODO: rewrite
   async function refresh({ updateCharts = false } = {}) {
     await _refresh();
-    let transformedClients = _clients.value?.map((client) => {
+    const transformedClients = _clients.value?.map((client) => {
       let avatar = undefined;
       if (client.name.includes('@') && client.name.includes('.')) {
         avatar = `https://gravatar.com/avatar/${sha256(client.name.toLowerCase().trim())}.jpg`;
@@ -128,11 +128,22 @@ export const useClientsStore = defineStore('Clients', () => {
 
     // TODO: move sort to backend
     if (transformedClients !== undefined) {
-      transformedClients = sortByProperty(
-        transformedClients,
-        'name',
-        globalStore.sortClient
-      );
+      const property = globalStore.sortClientProperty;
+      const direction = globalStore.sortClient ? 1 : -1;
+
+      transformedClients.sort((firstClient, secondClient) => {
+        const firstValue = firstClient[property] ?? 0;
+        const secondValue = secondClient[property] ?? 0;
+        const comparison =
+          typeof firstValue === 'string'
+            ? firstValue.localeCompare(String(secondValue))
+            : Number(firstValue) - Number(secondValue);
+
+        return (
+          comparison * direction ||
+          firstClient.name.localeCompare(secondClient.name)
+        );
+      });
     }
 
     clients.value = transformedClients ?? null;

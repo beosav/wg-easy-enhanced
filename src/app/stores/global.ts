@@ -6,7 +6,21 @@ export const useGlobalStore = defineStore('Global', () => {
     }
   );
 
-  const sortClient = ref(true); // Sort clients by name, true = asc, false = desc
+  const sortClient = useCookie<boolean>('sortClientAscending', {
+    default: () => true,
+    maxAge: 365 * 24 * 60 * 60,
+  });
+
+  const sortClientProperty = useCookie<
+    | 'name'
+    | 'transferTxCurrent'
+    | 'transferTx'
+    | 'transferRxCurrent'
+    | 'transferRx'
+  >('sortClientProperty', {
+    default: () => 'name',
+    maxAge: 365 * 24 * 60 * 60,
+  });
 
   const uiShowCharts = useCookie<boolean>('uiShowCharts', {
     default: () => false,
@@ -24,6 +38,7 @@ export const useGlobalStore = defineStore('Global', () => {
 
   return {
     sortClient,
+    sortClientProperty,
     information,
     refreshInformation,
     uiShowCharts,
