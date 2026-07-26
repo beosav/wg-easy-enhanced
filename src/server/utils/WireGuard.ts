@@ -16,6 +16,7 @@ class WireGuard {
     await this.#saveWireguardConfig(wgInterface);
     await this.#syncWireguardConfig(wgInterface);
     await this.#applyFirewallRules(wgInterface);
+    await this.#applyTrafficLimits(wgInterface);
   }
 
   /**
@@ -28,6 +29,15 @@ class WireGuard {
       wgInterface,
       clients,
       userConfig,
+      !WG_ENV.DISABLE_IPV6
+    );
+  }
+
+  async #applyTrafficLimits(wgInterface: InterfaceType) {
+    const clients = await Database.clients.getAll();
+    await trafficControl.rebuild(
+      wgInterface.name,
+      clients,
       !WG_ENV.DISABLE_IPV6
     );
   }
@@ -265,6 +275,10 @@ class WireGuard {
     await this.#applyFirewallRules(wgInterface);
     WG_DEBUG('Firewall rules applied successfully.');
 
+    WG_DEBUG('Applying client traffic limits...');
+    await this.#applyTrafficLimits(wgInterface);
+    WG_DEBUG('Client traffic limits applied successfully.');
+
     WG_DEBUG('Starting Cron Job...');
     await this.startCronJob();
     WG_DEBUG('Cron Job started successfully.');
@@ -289,6 +303,7 @@ class WireGuard {
   async Restart() {
     const wgInterface = await Database.interfaces.get();
     await wg.restart(wgInterface.name);
+    await this.#applyTrafficLimits(wgInterface);
   }
 
   async cronJob() {

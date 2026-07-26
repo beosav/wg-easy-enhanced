@@ -72,6 +72,8 @@ export const ClientUpdateSchema = schemaForType<UpdateClientType>()(
     allowedIps: AllowedIpsSchema.nullable(),
     serverAllowedIps: serverAllowedIps,
     firewallIps: FirewallIpsSchema.nullable(),
+    downloadLimitMbps: BandwidthLimitSchema,
+    uploadLimitMbps: BandwidthLimitSchema,
     mtu: MtuSchema,
     jC: JcSchema,
     jMin: JminSchema,

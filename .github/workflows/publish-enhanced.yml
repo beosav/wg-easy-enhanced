@@ -3,7 +3,7 @@ name: Publish enhanced image
 on:
   push:
     tags:
-      - 'v*-sort.*'
+      - 'v*'
   workflow_dispatch:
 
 permissions:

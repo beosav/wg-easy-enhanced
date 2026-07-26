@@ -131,7 +131,12 @@
     "firewallIps": "Firewall Allowed IPs",
     "firewallIpsDesc": "Destination IPs/CIDRs this client can access (server-side enforcement). Leave empty to use Allowed IPs. Supports optional port and protocol filtering. See docs for syntax.",
     "downloadPng": "Download PNG",
-    "copyPng": "Copy PNG"
+    "copyPng": "Copy PNG",
+    "bandwidthLimits": "Speed limits",
+    "bandwidthLimitsDesc": "Optional per-client traffic limits applied by the server",
+    "downloadLimitMbps": "Download limit (Mbps)",
+    "uploadLimitMbps": "Upload limit (Mbps)",
+    "bandwidthLimitDesc": "Leave empty or enter 0 for unlimited. Allowed range: 1–10000 Mbps"
   },
   "dialog": {
     "change": "Change",
@@ -213,7 +218,8 @@
       "address6": "IPv6 Address",
       "serverAllowedIps": "Server Allowed IPs",
       "firewallIps": "Firewall Allowed IPs",
-      "firewallIpsInvalid": "Invalid firewall IP entry. See docs for supported syntax."
+      "firewallIpsInvalid": "Invalid firewall IP entry. See docs for supported syntax.",
+      "bandwidthLimit": "Bandwidth limit"
     },
     "user": {
       "username": "Username",

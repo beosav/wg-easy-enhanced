@@ -76,6 +76,23 @@
             <FormNullArrayField v-model="data.dns" name="dns" />
           </FormGroup>
           <FormGroup>
+            <FormHeading :description="$t('client.bandwidthLimitsDesc')">
+              {{ $t('client.bandwidthLimits') }}
+            </FormHeading>
+            <FormNullNumberField
+              id="downloadLimitMbps"
+              v-model="data.downloadLimitMbps"
+              :description="$t('client.bandwidthLimitDesc')"
+              :label="$t('client.downloadLimitMbps')"
+            />
+            <FormNullNumberField
+              id="uploadLimitMbps"
+              v-model="data.uploadLimitMbps"
+              :description="$t('client.bandwidthLimitDesc')"
+              :label="$t('client.uploadLimitMbps')"
+            />
+          </FormGroup>
+          <FormGroup>
             <FormHeading>{{ $t('form.sectionAdvanced') }}</FormHeading>
             <FormNumberField
               id="mtu"

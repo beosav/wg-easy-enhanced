@@ -82,6 +82,13 @@ export const PersistentKeepaliveSchema = z
   .min(0, t('zod.persistentKeepalive'))
   .max(65535, t('zod.persistentKeepalive'));
 
+export const BandwidthLimitSchema = z
+  .number({ message: t('zod.client.bandwidthLimit') })
+  .int({ message: t('zod.client.bandwidthLimit') })
+  .min(1, { message: t('zod.client.bandwidthLimit') })
+  .max(10000, { message: t('zod.client.bandwidthLimit') })
+  .nullable();
+
 export const AddressSchema = z
   .string({ message: t('zod.address') })
   .min(1, { message: t('zod.address') })
