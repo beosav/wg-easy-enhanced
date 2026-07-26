@@ -38,6 +38,7 @@ export const client = sqliteTable('clients_table', {
   firewallIps: text('firewall_ips', { mode: 'json' }).$type<string[] | null>(),
   downloadLimitMbps: int('download_limit_mbps'),
   uploadLimitMbps: int('upload_limit_mbps'),
+  blockP2p: int('block_p2p', { mode: 'boolean' }).notNull().default(false),
   persistentKeepalive: int('persistent_keepalive').notNull(),
   mtu: int().notNull(),
   jC: int('j_c'),

@@ -136,7 +136,9 @@
     "bandwidthLimitsDesc": "Optional per-client traffic limits applied by the server",
     "downloadLimitMbps": "Download limit (Mbps)",
     "uploadLimitMbps": "Upload limit (Mbps)",
-    "bandwidthLimitDesc": "Leave empty or enter 0 for unlimited. Allowed range: 1–10000 Mbps"
+    "bandwidthLimitDesc": "Leave empty or enter 0 for unlimited. Allowed range: 1–10000 Mbps",
+    "blockP2p": "Block P2P and torrents",
+    "blockP2pDesc": "Blocks common BitTorrent ports, protocol signatures, DHT bootstrap requests, and excessive connection rates. Encrypted or tunneled P2P traffic may bypass detection."
   },
   "dialog": {
     "change": "Change",

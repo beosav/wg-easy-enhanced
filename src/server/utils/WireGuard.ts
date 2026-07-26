@@ -16,6 +16,7 @@ class WireGuard {
     await this.#saveWireguardConfig(wgInterface);
     await this.#syncWireguardConfig(wgInterface);
     await this.#applyFirewallRules(wgInterface);
+    await this.#applyP2pRules(wgInterface);
     await this.#applyTrafficLimits(wgInterface);
   }
 
@@ -40,6 +41,11 @@ class WireGuard {
       clients,
       !WG_ENV.DISABLE_IPV6
     );
+  }
+
+  async #applyP2pRules(wgInterface: InterfaceType) {
+    const clients = await Database.clients.getAll();
+    await p2pControl.rebuild(wgInterface.name, clients, !WG_ENV.DISABLE_IPV6);
   }
 
   /**
@@ -275,6 +281,10 @@ class WireGuard {
     await this.#applyFirewallRules(wgInterface);
     WG_DEBUG('Firewall rules applied successfully.');
 
+    WG_DEBUG('Applying client P2P rules...');
+    await this.#applyP2pRules(wgInterface);
+    WG_DEBUG('Client P2P rules applied successfully.');
+
     WG_DEBUG('Applying client traffic limits...');
     await this.#applyTrafficLimits(wgInterface);
     WG_DEBUG('Client traffic limits applied successfully.');
@@ -303,6 +313,7 @@ class WireGuard {
   async Restart() {
     const wgInterface = await Database.interfaces.get();
     await wg.restart(wgInterface.name);
+    await this.#applyP2pRules(wgInterface);
     await this.#applyTrafficLimits(wgInterface);
   }
 

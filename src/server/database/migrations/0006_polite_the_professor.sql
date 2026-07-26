@@ -1,0 +1,1 @@
+ALTER TABLE `clients_table` ADD `block_p2p` integer DEFAULT false NOT NULL;

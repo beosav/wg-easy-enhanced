@@ -91,6 +91,12 @@
               :description="$t('client.bandwidthLimitDesc')"
               :label="$t('client.uploadLimitMbps')"
             />
+            <FormSwitchField
+              id="blockP2p"
+              v-model="data.blockP2p"
+              :description="$t('client.blockP2pDesc')"
+              :label="$t('client.blockP2p')"
+            />
           </FormGroup>
           <FormGroup>
             <FormHeading>{{ $t('form.sectionAdvanced') }}</FormHeading>
