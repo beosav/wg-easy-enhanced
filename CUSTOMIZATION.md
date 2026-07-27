@@ -1,48 +1,19 @@
-# wg-easy-enhanced
+# Доработки wg-easy-enhanced
 
-This fork is based on wg-easy 15.3.0 and adds persistent client sorting by:
+Форк основан на wg-easy 15.3.0. В него добавлены:
 
-- name;
-- current download speed;
-- total downloaded traffic;
-- current upload speed;
-- total uploaded traffic.
+- постоянная сортировка клиентов по имени, текущей скорости и общему трафику;
+- независимое направление сортировки;
+- исправленная адаптивная компоновка панели списка клиентов;
+- индивидуальные ограничения скорости загрузки и отдачи;
+- индивидуальная блокировка типового P2P- и BitTorrent-трафика;
+- русские и английские подписи новых элементов интерфейса;
+- автоматическая сборка и публикация образа в GitHub Container Registry.
 
-The sort direction is controlled separately. Clients with equal values are
-ordered by name.
+Подробная русская инструкция, скриншоты, установка, обновление и восстановление находятся в [README_RU.md](README_RU.md).
 
-## Publish
-
-Create and push a release tag:
-
-```bash
-git tag v15.3.0-sort.2
-git push origin main v15.3.0-sort.2
-```
-
-GitHub Actions publishes:
+Актуальный неизменяемый тег:
 
 ```text
-ghcr.io/beosav/wg-easy-enhanced:v15.3.0-sort.2
-ghcr.io/beosav/wg-easy-enhanced:stable
-```
-
-The package must be made public in its GitHub package settings before an
-unauthenticated server can pull it.
-
-## Install
-
-Use the immutable version tag in `docker-compose.yaml`:
-
-```yaml
-services:
-  wg-easy:
-    image: ghcr.io/beosav/wg-easy-enhanced:v15.3.0-sort.2
-```
-
-Then update the container:
-
-```bash
-docker compose pull wg-easy
-docker compose up -d wg-easy
+ghcr.io/beosav/wg-easy-enhanced:v15.3.0-p2p.1
 ```
