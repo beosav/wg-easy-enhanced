@@ -40,6 +40,14 @@ export const WG_ENV = {
   WG_EXECUTABLE: await detectAwg(),
 };
 
+export const WG_TRIAL_ENV = {
+  ENABLED: process.env.TRIAL_ENABLED === 'true',
+  SECRET: process.env.TRIAL_SECRET,
+  DURATION_HOURS: parseIntegerEnv('TRIAL_DURATION_HOURS', 24, 1, 168),
+  MAX_PER_IP: parseIntegerEnv('TRIAL_MAX_PER_IP', 3, 1, 100),
+  TRUST_PROXY: process.env.TRIAL_TRUST_PROXY === 'true',
+};
+
 export const WG_INITIAL_ENV = {
   ENABLED: process.env.INIT_ENABLED === 'true',
   USERNAME: process.env.INIT_USERNAME,
@@ -62,4 +70,23 @@ function assertEnv<T extends string>(env: T) {
   }
 
   return val;
+}
+
+function parseIntegerEnv(
+  env: string,
+  fallback: number,
+  minimum: number,
+  maximum: number
+) {
+  const raw = process.env[env];
+  if (!raw) return fallback;
+
+  const value = Number.parseInt(raw, 10);
+  if (!Number.isInteger(value) || value < minimum || value > maximum) {
+    throw new Error(
+      `${env} must be an integer between ${minimum} and ${maximum}`
+    );
+  }
+
+  return value;
 }

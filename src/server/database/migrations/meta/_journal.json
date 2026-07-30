@@ -50,6 +50,13 @@
       "when": 1785104153019,
       "tag": "0006_polite_the_professor",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1785415516870,
+      "tag": "0007_open_vance_astro",
+      "breakpoints": true
     }
   ]
 }
